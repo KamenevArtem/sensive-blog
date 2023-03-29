@@ -40,12 +40,10 @@ def index(request):
                 .prefetch_related('author')\
                     .fetch_with_comments_count()[:5]
 
-
     most_popular_tags = Tag.objects\
         .annotate(posts_count=Count('posts'))\
             .order_by('-posts_count')\
                 .popular()[:5]\
-
 
     context = {
         'most_popular_posts': [
